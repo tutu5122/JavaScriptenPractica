@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+
+        window.addEventListener('DOMContentLoaded', (e) => {
+            let inputNombre = document.querySelector("#nombre");
+            let inputAsunto = document.querySelector("#asunto");
+            let inputMensaje = document.querySelector("#mensaje");
+            let formulario = document.querySelector("#formulario");
+
+            let errorNombre = document.querySelector(".errorNombre");
+            let errorAsunto = document.querySelector(".errorAsunto");
+            let errorMensaje = document.querySelector(".errorMensaje");
+            let resultado = document.querySelector(".resultado");
+
+            let validacionNombre = /^[a-zA-Z\s]+$/;
+            let validacionAsunto = /^[a-zA-Z\s]+$/;
+            let validacionMensaje = /^[a-zA-Z\s]+$/;
+
+            formulario.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const nombre = inputNombre.value;
+                const asunto = inputAsunto.value;
+                const mensaje = inputMensaje.value;
+
+                resultado.innerHTML = "";
+                errorNombre.innerHTML = "";
+                errorAsunto.innerHTML = "";
+                errorMensaje.innerHTML = "";
+
+                if (!validacionNombre.test(nombre)) {
+                    errorNombre.innerHTML = "El nombre es requerido y solo debe contener letras y espacios";
+                }
+
+                if (!validacionAsunto.test(asunto)) {
+                    errorAsunto.innerHTML = "El asunto es requerido y solo debe contener letras y espacios";
+                }
+
+                if (!validacionMensaje.test(mensaje)) {
+                    errorMensaje.innerHTML = "El mensaje es requerido y solo debe contener letras y espacios";
+                }
+
+                if (validacionNombre.test(nombre) && validacionAsunto.test(asunto) && validacionMensaje.test(mensaje)) {
+                    resultado.innerHTML = "¡Mensaje enviado con éxito!";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
